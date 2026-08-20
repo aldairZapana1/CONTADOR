@@ -13,22 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v5
+    - name: Build APK with Buildozer Action
+      uses: ArtemSzymanskii/buildozer-action@v1
       with:
-        python-version: '3.10'
-
-    - name: Install dependencies
-      run: |
-        sudo apt update
-        sudo apt install -y libtool automake autoconf pkg-config gettext build-essential openjdk-17-jdk
-        pip install "pip<24.0" "setuptools<69" "cython<3.0.0" buildozer
-
-    - name: Build with Buildozer
-      run: |
-        buildozer init
-        sed -i 's/android.archs = arm64-v8a, armeabi-v7a/android.archs = arm64-v8a/' buildozer.spec
-        yes | buildozer -v android debug
+        command: buildozer -v android debug
+        buildozer_version: master
 
     - name: Upload APK
       uses: actions/upload-artifact@v4

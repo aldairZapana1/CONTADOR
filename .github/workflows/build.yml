@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y libtool automake autoconf pkg-config gettext build-essential openjdk-17-jdk
-        pip install "pip<24.0" "setuptools<69" "cython<3.0.0" buildozer
+        python -m pip install --upgrade pip setuptools "cython<3.0.0" buildozer
 
     - name: Build with Buildozer
       run: |

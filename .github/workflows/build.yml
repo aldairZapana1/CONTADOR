@@ -1,3 +1,4 @@
+
 name: Build Android APK
  
 on:
@@ -18,11 +19,29 @@ jobs:
         with:
           python-version: '3.10'
  
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y libtool automake autoconf pkg-config gettext build-essential openjdk-17-jdk unzip zip git zlib1g-dev
-          pip install "pip<24.0" "setuptools<69" "cython<3.0.0" buildozer
+          sudo apt install -y \
+            git zip unzip \
+            openjdk-17-jdk \
+            python3-pip \
+            autoconf automake autoconf-archive \
+            libtool libltdl-dev \
+            pkg-config gettext \
+            build-essential \
+            zlib1g-dev \
+            libncurses-dev libtinfo-dev \
+            cmake \
+            libffi-dev \
+            libssl-dev \
+            ccache \
+            m4
+ 
+      - name: Install Python build tools
+        run: |
+          pip install --upgrade "pip<24.0" "setuptools<69" "cython<3.0.0"
+          pip install buildozer
  
       - name: Build with Buildozer
         run: |

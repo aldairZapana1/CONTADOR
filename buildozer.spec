@@ -19,7 +19,7 @@ source.include_exts = py,png,jpg,jpeg,kv,atlas
 version = 0.1
 
 # (list) Application requirements
-requirements = python3,kivy
+requirements = python3==3.11.9,kivy
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/icon.png
